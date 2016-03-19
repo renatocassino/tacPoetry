@@ -16,26 +16,26 @@ Algorítmo utilizado para a sequência de palavras é a cadeia de Markov.
 
 == Relações de sequência de palavras
 
-Artigo -> Substantivo, Numeral
-Preposição -> Substantivo, Pronome, Verbo
-Conjunção -> Artigo, Pronome, Advérbio
-Substantivo -> Preposição, Conjunção, Advérbio, Adjetivo
-Pronome -> Conjunção, Verbo
-Verbo -> Artigo, Preposição, Pronome
-Advérbio -> Conjunção, Verbo, Adjetivo
-Adjetivo -> Preposição, Verbo
-Numeral -> Substantivo
+* Artigo -> Substantivo, Numeral
+* Preposição -> Substantivo, Pronome, Verbo
+* Conjunção -> Artigo, Pronome, Advérbio
+* Substantivo -> Preposição, Conjunção, Advérbio, Adjetivo
+* Pronome -> Conjunção, Verbo
+* Verbo -> Artigo, Preposição, Pronome
+* Advérbio -> Conjunção, Verbo, Adjetivo
+* Adjetivo -> Preposição, Verbo
+* Numeral -> Substantivo
 
 == Valores do algoritmo de Markov
 
-Art.  => Artigo
-Prep. => Preposição
-Conj. => Conjunção
-Subs. => Substantivo
-Pron. => Pronome
-Verb. => Verbo
-Adv.  => Advérbio
-Adj.  => Adjetivo
-Num.  => Numeral
+* Art.  => Artigo
+* Prep. => Preposição
+* Conj. => Conjunção
+* Subs. => Substantivo
+* Pron. => Pronome
+* Verb. => Verbo
+* Adv.  => Advérbio
+* Adj.  => Adjetivo
+* Num.  => Numeral
 
-<rule>.s => Plural | Ex: { 'Art.' => 'o', 'Art.s' => 'os' }
+* <rule>.s => Plural | Ex: { 'Art.' => 'o', 'Art.s' => 'os' }
