@@ -18,6 +18,9 @@ gem "word_count"
 # br Stemmer
 gem 'brstemmer'
 
+# Rspec
+gem 'rspec'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
