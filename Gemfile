@@ -20,6 +20,7 @@ gem 'brstemmer'
 
 # Rspec
 gem 'rspec'
+gem 'rspec-rails', '~> 3.0'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
