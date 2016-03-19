@@ -39,3 +39,7 @@ Algorítmo utilizado para a sequência de palavras é a cadeia de Markov.
 * Num.  => Numeral
 
 * <rule>.s => Plural | Ex: { 'Art.' => 'o', 'Art.s' => 'os' }
+
+== Fontes para estudo
+
+-> Cadeia de Markov => http://www.inf.pucrs.br/peg/pub/tr/TI1_Luciana.pdf
