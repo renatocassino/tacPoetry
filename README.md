@@ -43,3 +43,15 @@ Algorítmo utilizado para a sequência de palavras é a cadeia de Markov.
 == Fontes para estudo
 
 -> Cadeia de Markov => http://www.inf.pucrs.br/peg/pub/tr/TI1_Luciana.pdf
+
+== Atributos de cada classe gramatical
+
+Subs. -> Gênero, Número, Grau
+Verb. -> Número, Stemmer, Tempo
+Art. -> Gênero, Número
+Prep.
+Adj. -> Gênero, Número, Grau, Stemmer
+Adv.
+Intj.
+Conj.
+Pron. -> Gênero, Número, Stemmer
