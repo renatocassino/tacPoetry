@@ -1,28 +1,18 @@
-== README
+== Pesquisa e desenvolvimento
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Substantivo: Toda palavra que designa ser coisa ou substância.
+* Artigo: o, a, os, as, um, uma, uns, umas.
+* Preposição: a, ante, até, após, com, contra, de, desde, em, entre, para, per, perante, por, sem, sob, sobre, trás
+* Advérbio: Classe gramatical das palavras que modificam em verbo, adjetivo ou outro advérbio. Ex: Ele correu <tt>muito</tt> rápido.
+* Adjetivo: Toda palavra que se refere a um substantivo indicando-lhe um atributo. Ex: A torre é <tt>grande</tt>.
+* Conjunção: Palavras invariáveis que servem para conectar orações ou dois termos de mesma função sintática, estabelecendo entre eles uma relação de dependência ou de simples coordenação.
+* Pronome: Pode ser do caso reto ou oblíquo. Eu, tu ele, nós, vós, eles, mim, comigo, ti, contigo, conosco, convosco.
+* Interjeição: Oba! Parabéns! Ufa!
+* Onomatopéia: Repesenta sons. Ex: au au, toc toc.
+* Verbo: Palavra que exprime um fato.
+* Numeral: Palavra que encerra a ideia de um número
 
-Things you may want to cover:
+Algorítmo utilizado para a sequência de palavras é a cadeia de Markov.
 
-* Ruby version
+== Relações de sequência de palavras
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
