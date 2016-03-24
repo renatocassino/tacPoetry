@@ -16,7 +16,8 @@ class Word
         :ADVERBIO => 'adverbio',
         :ARTIGO => 'artigo',
         :PREPOSICAO => 'preposicao',
-        :VERBO => 'verbo',
+        :VERBO_REGULAR => 'verbo_regular',
+        :VERBO_IRREGULAR => 'verbo_irregular',
         :NUMERAL => 'numeral',
         :APOSITIVO => 'apositivo',
         :UNDEFINED => 'undefined'

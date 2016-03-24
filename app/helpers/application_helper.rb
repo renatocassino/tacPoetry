@@ -3,4 +3,5 @@ module ApplicationHelper
   # https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&list=search&srsearch=a&page=2
 
   # Substantivo.where(word: Regexp.new(".*ção$") ).all.count
+  # http://es.bab.la/conjugacion/portugues/acender -> Conjugação
 end

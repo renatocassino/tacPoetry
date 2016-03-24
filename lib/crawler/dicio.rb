@@ -60,29 +60,38 @@ module Crawler
         readed+=1
 
         page = self.parse_page url
-
-        begin
-          page.css('.adicional.sinonimos > a').each { |new_page| @urls_words << new_page.attributes['href'].value }
-          @urls_words.uniq!
-
-          word_title = page.css('#content .card h1').first.content
-          word_stemmed = word_title.brstemmer
-          if Word.where(stemmed: word_stemmed).count == 0
-            type = self.get_type page
-            continue unless type
-
-            word = Word.new
-            word.word = word_title
-            word.type = type
-            word.stemmed = word_stemmed
-            word.save
-
-            puts " - Word #{word.word} appended in database".colorize(:green)
-          end
-        rescue
-        end
+        self.craw page
 
         break if readed >= @urls_words.count
+      end
+    end
+
+    def craw page
+      begin
+        @urls_words = [] if @urls_words.nil?
+
+        page.css('.adicional.sinonimos > a').each { |new_page| @urls_words <<
+
+            new_page.attributes['href'].value }
+        @urls_words.uniq!
+
+        word_title = page.css('#content .card h1').first.content
+        word_stemmed = word_title.brstemmer
+
+        type = self.get_type page
+        return unless type
+
+        if Word.where(stemmed: word_stemmed, type: type).count == 0
+
+          word = Word.new
+          word.word = word_title
+          word.type = type
+          word.stemmed = word_stemmed
+          word.save
+
+          puts " - Word #{word.word} appended in database".colorize(:green)
+        end
+      rescue
       end
     end
 
@@ -95,7 +104,12 @@ module Crawler
       elsif classe_gramatical =~ /substantivo/i
         Word.type[:SUBSTANTIVO]
       elsif classe_gramatical =~ /verbo/i
-        Word.type[:VERBO]
+        type_content = page.css('#conjugacao > p').first.content
+        if type_content.match(/Tipo do Verbo+\: (?<type>\w+)/i)[:type] == 'regular'
+          Word.type[:VERBO_REGULAR]
+        else
+          Word.type[:VERBO_IRREGULAR]
+        end
       elsif classe_gramatical =~ /adjetivo/i
         Word.type[:ADJETIVO]
       elsif classe_gramatical =~ /advérbio/i
