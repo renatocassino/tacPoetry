@@ -32,7 +32,7 @@ class Artigo
 
   def self.get_word conditions
     data = self.data
-    data[rand(0..data.count-1)][:masculine][:singular]
+    data[rand(0..data.count-1)][[:masculine,:feminine].sample][[:singular,:plural].sample]
   end
 
   def self.get_artigo(genre=:masculine, number=:singular)
