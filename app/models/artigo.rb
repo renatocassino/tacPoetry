@@ -30,6 +30,11 @@ class Artigo
     ].freeze
   end
 
+  def self.get_word conditions
+    data = self.data
+    data[rand(0..data.count-1)][:masculine][:singular]
+  end
+
   def self.get_artigo(genre=:masculine, number=:singular)
     data = self.data
     data[rand(0..data.count-1)][genre][number]

@@ -10,4 +10,10 @@ class Substantivo
   field :feminine_plural, type: String
   field :type, type: String
   field :syllables, type: String
+
+  def self.get_word conditions
+    number = rand(0..self.all.count-1)
+    word = self.limit(-1).skip(number).first
+    word.word
+  end
 end

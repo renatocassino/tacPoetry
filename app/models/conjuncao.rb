@@ -1,0 +1,3 @@
+class Conjuncao
+
+end
