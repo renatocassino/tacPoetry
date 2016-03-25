@@ -29,12 +29,15 @@ module Crawler
     def get_pagination_links
       readed = 0
       loop do
-        current_url = @urls[readed]
-        readed+=1
+        begin
+          current_url = @urls[readed]
+          readed+=1
 
-        self.get_info current_url
+          self.get_info current_url
 
-        break if readed >= @urls.count
+          break if readed >= @urls.count
+        rescue
+        end
       end
     end
 
@@ -48,8 +51,11 @@ module Crawler
     end
 
     def parse_page current_url
-      content = Net::HTTP.get(URI.parse("http://www.dicio.com.br#{current_url}"))
-      Nokogiri::HTML content
+      begin
+        content = Net::HTTP.get(URI.parse("http://www.dicio.com.br#{current_url}"))
+        Nokogiri::HTML content
+      rescue
+      end
     end
 
     def go
