@@ -43,9 +43,27 @@ Valores do algoritmo de Markov
 
 * <rule>.s => Plural | Ex: { 'Art.' => 'o', 'Art.s' => 'os' }
 
+Algoritmo de Markov
+========
+| Markov code  | Classe gramatical                       |
+|--------------|-----------------------------------------|
+| Subs.        | Substantivo                             |
+| Verb.        | Verbo                                   |
+| Art.         | Artigo                                  |
+| Prep.        | Preposição                              |
+| Adj.         | Adjetivo                                |
+| Adv.         | Advérbio                                |
+| Intj.        | Interjeição                             |
+| Conj.        | Conjunção                               |
+| Pron.        | Pronome                                 |
+| [class].s    | Classe gramatical no plural             |
+| [class].mas  | Classe gramatical no masculino          |
+| [class].fem  | Classe gramatical no feminino           |
+| [class].mass | Classe gramatical no plural             |
+| [class].fems | Classe gramatical no feminino no plural |
+
 Fontes para estudo
 ========
-
 -> Cadeia de Markov => http://www.inf.pucrs.br/peg/pub/tr/TI1_Luciana.pdf
 
 ** Atributos de cada classe gramatical
