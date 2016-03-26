@@ -76,6 +76,14 @@ class Verbo
     nil
   end
 
+  def get_conjugado sym=:symbol
+    if self.fields[:type] == self.types[:regular]
+      self.conjugado[sym]
+    else
+      self.fields[sym]
+    end
+  end
+
   def conjugado
     # Magia here
     word = self.fields[:stemmed]
