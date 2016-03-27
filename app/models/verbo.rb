@@ -65,7 +65,7 @@ class Verbo
     }
   end
 
-  def initialize
+  def init params={}
     self.fields[:prtPft] = self.default
     self.fields[:prtImp] = self.default
     self.fields[:prtMqp] = self.default
@@ -73,10 +73,9 @@ class Verbo
     self.fields[:futPrt] = self.default
     self.fields[:futPre] = self.default
     self.fields[:type] = self.types[:regular]
-    nil
   end
 
-  def get_conjugado sym=:symbol
+  def get_conjugado sym=:pre
     if self.fields[:type] == self.types[:regular]
       self.conjugado[sym]
     else
@@ -127,13 +126,13 @@ class Verbo
       :pre => {
           :sin => {
               primeira: "#{word}o",
-              segunda: "#{word}as",
-              terceira: "#{word}a"
+              segunda: "#{word}es",
+              terceira: "#{word}e"
           },
           :plu => {
-              primeira: "#{word}amos",
-              segunda: "#{word}ais",
-              terceira: "#{word}am"
+              primeira: "#{word}emos",
+              segunda: "#{word}eis",
+              terceira: "#{word}em"
           }
       },
       :futPrt => {
@@ -160,6 +159,6 @@ class Verbo
               terceira: "#{word}arão"
           }
       }
-    }.freeze
+    }
   end
 end
