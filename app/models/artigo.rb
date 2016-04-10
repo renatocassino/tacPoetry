@@ -1,41 +1,53 @@
 class Artigo
   def self.data
-    [
-        {
+    {
+        defined: {
             word: 'o',
-            type: Word.type[:ARTIGO],
-            defined: true,
-            masculine: {
-                singular: 'o',
-                plural: 'os'
+            mas: {
+                sin: 'o',
+                plu: 'os'
             },
-            feminine: {
-                singular: 'a',
-                plural: 'as'
+            fem: {
+                sin: 'a',
+                plu: 'as'
             }
         },
-        {
+        undefined: {
             word: 'um',
-            type: Word.type[:ARTIGO],
-            defined: false,
-            masculine: {
-                singular: 'um',
-                plural: 'uns'
+            mas: {
+                sin: 'um',
+                plu: 'uns'
             },
-            feminine: {
-                singular: 'uma',
-                plural: 'umas'
+            fem: {
+                sin: 'uma',
+                plu: 'umas'
             }
         },
-    ].freeze
+    }.freeze
   end
 
-  def self.get_word conditions
-    data = self.data
-    data[rand(0..data.count-1)][[:masculine,:feminine].sample][[:singular,:plural].sample]
+  def self.get_word condition
+    conditions = condition.attributes
+    if conditions[:is_defined].nil?
+      is_defined = [:defined, :undefined][SecureRandom.random_number(2)]
+    end
+
+    if conditions[:genero].nil?
+      genero = [:mas, :fem][SecureRandom.random_number(2)]
+    else
+      genero = conditions[:genero]
+    end
+
+    if conditions[:grau].nil?
+      grau = [:sin, :plu][SecureRandom.random_number(2)]
+    else
+      grau = conditions[:grau]
+    end
+
+    self.data[is_defined][genero][grau]
   end
 
-  def self.get_artigo(genre=:masculine, number=:singular)
+  def self.get_artigo(genre=:mas, number=:sin)
     data = self.data
     data[rand(0..data.count-1)][genre][number]
   end

@@ -43,7 +43,10 @@ module Poetry
       conditions.split('&').map { |cond|
         begin
           cond = cond.split ':'
-          instance_variable_set cond[0], cond[1].to_sym
+          next if cond[1].nil?
+
+          instance = "@#{cond[0]} = :#{cond[1]}"
+          eval instance
         rescue
         end
       }
