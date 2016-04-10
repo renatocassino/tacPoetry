@@ -38,13 +38,13 @@ class Artigo
       genero = conditions[:genero]
     end
 
-    if conditions[:grau].nil?
-      grau = [:sin, :plu][SecureRandom.random_number(2)]
+    if conditions[:numero].nil?
+      numero = [:sin, :plu][SecureRandom.random_number(2)]
     else
-      grau = conditions[:grau]
+      numero = conditions[:numero]
     end
 
-    self.data[is_defined][genero][grau]
+    self.data[is_defined][genero][numero]
   end
 
   def self.get_artigo(genre=:mas, number=:sin)

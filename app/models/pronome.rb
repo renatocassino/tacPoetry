@@ -24,10 +24,10 @@ class Pronome
   def self.get_word condition
     conditions = condition.attributes
 
-    if conditions[:grau].nil?
-      grau = [:sin, :plu][SecureRandom.random_number(2)]
+    if conditions[:numero].nil?
+      numero = [:sin, :plu][SecureRandom.random_number(2)]
     else
-      grau = conditions[:grau]
+      numero = conditions[:numero]
     end
 
     if conditions[:pessoa].nil?
@@ -42,7 +42,7 @@ class Pronome
       genero = conditions[:genero]
     end
 
-    pronome = self.data[grau][pessoa]
+    pronome = self.data[numero][pessoa]
     return pronome if pronome.class.name == "String"
     pronome[genero].sample
   end

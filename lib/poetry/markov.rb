@@ -1,11 +1,11 @@
-# coding: iso-8859-1
+# coding: utf-8
 =begin
   Sequências
 
   Artigo -> Substantivo, Numeral
   Preposição -> Substantivo, Pronome, Verbo
   Conjunção -> Artigo, Pronome, Advérbio
-  Substantivo -> Preposição, Conjunção, Advérbio, Adjetivo
+  Substantivo -> Preposiçãoo, Conjunção, Advérbio, Adjetivo
   Pronome -> Conjunção, Verbo
   Verbo -> Artigo, Preposição, Pronome
   Advérbio -> Conjunção, Verbo, Adjetivo

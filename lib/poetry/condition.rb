@@ -1,7 +1,9 @@
+# coding: utf-8
 module Poetry
   class Condition
     def initialize
       @tempo = nil
+      @numero = nil
       @genero = nil
       @grau = nil
 
@@ -10,7 +12,7 @@ module Poetry
 
     def reset
       @genero = [:mas, :fem][SecureRandom.random_number(2)]
-      @grau = [:sin, :plu][SecureRandom.random_number(2)]
+      @numero = [:sin, :plu][SecureRandom.random_number(2)]
       nil
     end
 
@@ -22,17 +24,23 @@ module Poetry
       @grau
     end
 
+    def numero
+      @numero
+    end
+
     def clear
       @genero = nil
-      @grau = nil
+      @numero = nil
       @tempo = nil
+      @grau = nil
     end
 
     def attributes
       {
         tempo: @tempo,
         genero: @genero,
-        grau: @grau
+        grau: @grau,
+        numero: @numero
       }
     end
 
@@ -57,8 +65,9 @@ module Poetry
     def get_conditions keys=nil
       condition = {
         tempo: @tempo,
-        grau: @grau,
-        genero: @genero
+        numero: @numero,
+        genero: @genero,
+        grau: @grau
       }
 
       condition.map { |key, cond| "#{key}:#{cond}" }.join '&'
