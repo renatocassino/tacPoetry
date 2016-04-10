@@ -13,8 +13,26 @@ class Substantivo
   field :type, type: String
 
   def self.get_word condition
-    number = rand(0..self.all.count-1)
+    conditions = condition.attributes
+    where = {}
+
+    if conditions[:genero].nil?
+      genero = [:mas, :fem][SecureRandom.random_number(2)]
+    else
+      genero = conditions[:genero]
+    end
+
+    if conditions[:numero].nil?
+      numero = [:sin, :plu][SecureRandom.random_number(2)]
+    else
+      numero = conditions[:numero]
+    end
+
+    where[genero == :mas ? :has_mas : :has_fem] = true
+
+    substantivos = self.where(where)
+    number = SecureRandom.random_number(substantivos.count)
     word = self.limit(-1).skip(number).first
-    word.word
+    eval("word.#{genero}_#{numero}")
   end
 end
