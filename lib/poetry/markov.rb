@@ -1,3 +1,4 @@
+# coding: iso-8859-1
 =begin
   Sequências
 
@@ -57,32 +58,33 @@ module Poetry
 
     def generate_text_encoded
       types = Markov.types
+      condition = Condition.new
 
-      text = ""
+      text = []
       current_type = nil
       10.times do
         if current_type.nil?
-          current_type = types.keys.sample
-        else
-          nexts = types[current_type][:nexts]
-          current_type = nexts.sample
+          current_type = types.keys[SecureRandom.random_number(types.keys.size)]
         end
 
-        text += "#{current_type.to_s}. "
+        text << "#{current_type.to_s}.#{condition.get_conditions}"
+
+        nexts = types[current_type][:nexts]
+        current_type = nexts[SecureRandom.random_number(nexts.size)]
       end
 
-      text
+      text.join ' '
     end
 
     def decode_text text
-      text.gsub(/(?<next>\w+\.(?:[\w]+)*)/) do |word|
+      condition = Condition.new
+      text.gsub(/(?<word>[A-Z]\w+\.(?:[\w:&]*))/) do |word|
         word = word.split '.'
         klass = Markov.types[word[0].to_sym][:class]
-        conditions = nil
-        conditions = self.get_conditions word[1] unless word[1].nil?
+        condition.set_conditions word[1]
 
         begin
-          klass.get_word conditions
+          klass.get_word condition
         rescue
           word[0]
         end

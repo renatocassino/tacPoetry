@@ -1,0 +1,25 @@
+web:
+    build: .
+    links:
+      - db
+      - mongodb
+    ports:
+      - "3000:3000"
+    command: bundle exec rails s -b '0.0.0.0'
+    volumes:
+      - ./:/app/
+db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123
+      - MYSQL_DATABASE=tacpoetry
+mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - /data/db

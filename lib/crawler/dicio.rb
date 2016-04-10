@@ -1,3 +1,4 @@
+# coding: iso-8859-1
 require 'net/http'
 require 'uri'
 require 'json'
@@ -82,20 +83,23 @@ module Crawler
         @urls_words.uniq!
 
         word_title = page.css('#content .card h1').first.content
-        word_stemmed = word_title.brstemmer
+        if word_title.match(/ /).nil?
+          
+          word_stemmed = word_title.brstemmer
 
-        type = self.get_type page
-        return unless type
+          type = self.get_type page
+          return unless type
 
-        if Word.where(stemmed: word_stemmed, type: type).count == 0
+          if Word.where(stemmed: word_stemmed, type: type).count == 0
 
-          word = Word.new
-          word.word = word_title
-          word.type = type
-          word.stemmed = word_stemmed
-          word.save
+            word = Word.new
+            word.word = word_title
+            word.type = type
+            word.stemmed = word_stemmed
+            word.save
 
-          puts " - Word #{word.word} appended in database".colorize(:green)
+            puts " - Word #{word.word} appended in database".colorize(:green)
+          end
         end
       rescue
       end
