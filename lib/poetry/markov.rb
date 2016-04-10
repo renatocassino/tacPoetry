@@ -18,35 +18,35 @@ module Poetry
     def self.types
       {
           :Art  => {
-              class: Artigo,
+              class: ::Artigo,
               nexts: [:Subs] #, :Num]
           },
           :Prep => {
-              class: Preposicao,
+              class: ::Preposicao,
               nexts: [:Subs, :Conj, :Adv, :Adj]
           },
           :Conj => {
-              class: Conjuncao,
+              class: ::Conjuncao,
               nexts: [:Art, :Pron, :Adv]
           },
           :Subs => {
-              class: Substantivo,
+              class: ::Substantivo,
               nexts: [:Prep, :Conj, :Adv, :Adj]
           },
           :Pron => {
-              class: Pronome,
+              class: ::Pronome,
               nexts: [:Conj, :Verb]
           },
           :Verb => {
-              class: Verbo,
+              class: ::Verbo,
               nexts: [:Art, :Prep, :Pron]
           },
           :Adv  => {
-              class: Adverbio,
+              class: ::Adverbio,
               nexts: [:Conj, :Verb, :Adj]
           },
           :Adj  => {
-              class: Adjetivo,
+              class: ::Adjetivo,
               nexts: [:Prep, :Verb]
           }
           # :Num  => {

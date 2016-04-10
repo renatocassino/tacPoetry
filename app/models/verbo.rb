@@ -76,22 +76,12 @@ class Verbo
     self.fields[:type] = self.types[:regular]
   end
 
-  def self.test
-    verbo = Verbo.new
-    verbo.word = 'pular'
-    verbo.stemmed = 'pul'
-    verbo.type = 'regular'
-    condition = Poetry::Condition.new
-    condition.set_conditions "tempo:futPre&pessoa:terceira"
-    verbo.get_conjugado condition
-  end
-
-  def get_conjugado condition
-    byebug
+  def self.get_word condition
     conditions = condition.attributes
+    verb = Verbo.new
 
     if conditions[:tempo].nil?
-      keys = self.conjugado.keys
+      keys = verb.conjugado.keys
       tempo = keys[SecureRandom.random_number(keys.count)]
     else
       tempo = conditions[:tempo]
@@ -109,7 +99,17 @@ class Verbo
       pessoa = conditions[:pessoa]
     end
 
-    if self.type == self.types[:regular]
+    type = ['regular', 'irregular'][SecureRandom.random_number(2)]
+
+    consult = Verbo.where(type: type)
+    number = rand(0..consult.all.count-1)
+    verbo = consult.limit(-1).skip(number).first
+
+    verbo.conjugado[tempo][numero][pessoa]
+  end
+
+  def conjugando
+    if self.type == verb.types[:regular]
       self.conjugado[tempo][numero][pessoa]
     else
       command = "self.#{tempo}[#{numero}][#{pessoa}]"
