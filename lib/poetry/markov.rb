@@ -62,7 +62,7 @@ module Poetry
 
       text = []
       current_type = nil
-      10.times do
+      30.times do
         if current_type.nil?
           current_type = types.keys[SecureRandom.random_number(types.keys.size)]
         end

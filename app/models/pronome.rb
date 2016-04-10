@@ -1,4 +1,4 @@
-# coding: iso-8859-1
+# coding: utf-8
 class Pronome
   def self.data
     {
@@ -6,16 +6,16 @@ class Pronome
         primeira: "eu",
         segunda: "tu",
         terceira: {
-          mas: ["ele", "você"],
-          fem: ["ela", "você"]
+          mas: ["ele", "vocÃª"],
+          fem: ["ela", "vocÃª"]
         }
       },
       plu: {
-        primeira: "nós",
-        segunda: "vós",
+        primeira: "nÃ³s",
+        segunda: "vÃ³s",
         terceira: {
-          mas: ["eles", "vocês"],
-          fem: ["elas", "vocês"]
+          mas: ["eles", "vocÃªs"],
+          fem: ["elas", "vocÃªs"]
         }
       }
     }.freeze
