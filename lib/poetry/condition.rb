@@ -6,6 +6,7 @@ module Poetry
       @numero = nil
       @genero = nil
       @grau = nil
+      @pessoa = nil
 
       self.reset
     end
@@ -13,6 +14,7 @@ module Poetry
     def reset
       @genero = [:mas, :fem][SecureRandom.random_number(2)]
       @numero = [:sin, :plu][SecureRandom.random_number(2)]
+      @pessoa = [:primeira, :segunda, :terceira][SecureRandom.random_number(3)]
       nil
     end
 
@@ -28,11 +30,16 @@ module Poetry
       @numero
     end
 
+    def pessoa
+      @pessoa
+    end
+
     def clear
       @genero = nil
       @numero = nil
       @tempo = nil
       @grau = nil
+      @pessoa = nil
     end
 
     def attributes
@@ -40,7 +47,8 @@ module Poetry
         tempo: @tempo,
         genero: @genero,
         grau: @grau,
-        numero: @numero
+        numero: @numero,
+        pessoa: @pessoa
       }
     end
 
@@ -67,7 +75,8 @@ module Poetry
         tempo: @tempo,
         numero: @numero,
         genero: @genero,
-        grau: @grau
+        grau: @grau,
+        pessoa: @pessoa
       }
 
       condition.map { |key, cond| "#{key}:#{cond}" }.join '&'

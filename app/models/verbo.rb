@@ -1,3 +1,4 @@
+# coding: utf-8
 =begin
   Nomenclatura Frank baseado na nomenclatura húngara.
 
@@ -75,17 +76,50 @@ class Verbo
     self.fields[:type] = self.types[:regular]
   end
 
-  def get_conjugado sym=:pre
-    if self.fields[:type] == self.types[:regular]
-      self.conjugado[sym]
+  def self.test
+    verbo = Verbo.new
+    verbo.word = 'pular'
+    verbo.stemmed = 'pul'
+    verbo.type = 'regular'
+    condition = Poetry::Condition.new
+    condition.set_conditions "tempo:futPre&pessoa:terceira"
+    verbo.get_conjugado condition
+  end
+
+  def get_conjugado condition
+    byebug
+    conditions = condition.attributes
+
+    if conditions[:tempo].nil?
+      keys = self.conjugado.keys
+      tempo = keys[SecureRandom.random_number(keys.count)]
     else
-      self.fields[sym]
+      tempo = conditions[:tempo]
+    end
+
+    if conditions[:numero].nil?
+      numero = [:sin, :plu][SecureRandom.random_number(2)]
+    else
+      numero = conditions[:numero]
+    end
+
+    if conditions[:pessoa].nil?
+      pessoa = [:primeira, :segunda, :terceira][SecureRandom.random_number(3)]
+    else
+      pessoa = conditions[:pessoa]
+    end
+
+    if self.type == self.types[:regular]
+      self.conjugado[tempo][numero][pessoa]
+    else
+      command = "self.#{tempo}[#{numero}][#{pessoa}]"
+      eval command
     end
   end
 
   def conjugado
     # Magia here
-    word = self.fields[:stemmed]
+    word = self.stemmed
     {
       :prtPft => {
           :sin => {
@@ -126,13 +160,13 @@ class Verbo
       :pre => {
           :sin => {
               primeira: "#{word}o",
-              segunda: "#{word}es",
-              terceira: "#{word}e"
+              segunda: "#{word}as",
+              terceira: "#{word}a"
           },
           :plu => {
-              primeira: "#{word}emos",
-              segunda: "#{word}eis",
-              terceira: "#{word}em"
+              primeira: "#{word}amos",
+              segunda: "#{word}ais",
+              terceira: "#{word}am"
           }
       },
       :futPrt => {
@@ -159,6 +193,6 @@ class Verbo
               terceira: "#{word}arão"
           }
       }
-    }
+    }.freeze
   end
 end

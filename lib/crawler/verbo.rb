@@ -1,8 +1,31 @@
+# coding: utf-8
 module Crawler
   class Verbo
     def self.run
       verbs = self.get_all_verbs
       self.insert_in_db verbs
+    end
+
+    def self.de_para_tempo
+      {
+        "Presente do Indicativo" => :pre,
+        "Pretérito Imperfeito do Indicativo" => :prtImp,
+        "Pretérito Perfeito do Indicativo" => :prtPft,
+        "Mais-que-perfeito do Indicativo" => :prtMqp,
+        "Futuro do Pretérito do Indicativo" => :futPrt,
+        "Futuro do Presente do Indicativo" => :futPre
+      }.freeze
+    end
+
+    def self.de_para_pronome
+      {
+        "eu" => [:sin, :primeira],
+        "tu" => [:sin, :segunda],
+        "ele" => [:sin, :terceira],
+        "nós" => [:plu, :primeira],
+        "vós" => [:plu, :segunda],
+        "eles" => [:plu, :terceira]
+      }.freeze
     end
 
     def self.get_all_verbs
@@ -21,31 +44,25 @@ module Crawler
             verbo.save
           else
             verbo.type = 'irregular'
+            page = self.parse_page verb
+            verbos_dom = page.css('.verb-wrapper > ul > li')
 
-            self.parse_page verb
-            .tempo-conjugacao
+            verbos_dom.each do |node|
+              tempo = node.css('.tempo').text
+              conjugacao = node.text.scan(/(?<pronome>(eu|tu|ele|nós|vós|eles)) (?<verbo>[\wáàãâéêíóôõú-]+)/)
 
-            verbo.pre[:sin]
+              tempo = self.de_para_tempo[tempo]
+              next if tempo.nil?
 
-            :prtPft
-            :prtImp
-            :prtMqp
-            :pre
-            :futPrt
-            :futPre
+              conjugacao.each do |conj|
+                pronome = self.de_para_pronome[conj[0]]
+                verbo[tempo] = {} if verbo[tempo].nil?
+                verbo[tempo][pronome[0]] = {} if verbo[tempo][pronome[0]].nil?
+                verbo[tempo][pronome[0]][pronome[1]] = conj[1]
+              end
+            end
 
-            {
-                :sin => {
-                    primeira: nil,
-                    segunda: nil,
-                    terceira: nil
-                },
-                :plu => {
-                    primeira: nil,
-                    segunda: nil,
-                    terceira: nil
-                }
-            }
+            verbo.save
 
           end
         end
@@ -53,12 +70,11 @@ module Crawler
     end
 
     def self.parse_page verb
-      def parse_page current_url
-        begin
-          content = Net::HTTP.get(URI.parse("http://www.dicio.com.br#{current_url}"))
-          Nokogiri::HTML content
-        rescue
-        end
+      begin
+        url = "http://www.dicio.com.br/#{verb.word.to_slug}/"
+        content = Net::HTTP.get(URI.parse(url))
+        Nokogiri::HTML content
+      rescue
       end
     end
   end
