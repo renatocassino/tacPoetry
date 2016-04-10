@@ -1,3 +1,4 @@
+# coding: utf-8
 class Adverbio
   include Mongoid::Document
   store_in collection: "adverbios"
@@ -6,7 +7,7 @@ class Adverbio
   field :stemmed, type: String
   field :type, type: String
 
-  def self.get_word conditions
+  def self.get_word condition
     number = rand(0..self.all.count-1)
     word = self.limit(-1).skip(number).first
     word.word
