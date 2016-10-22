@@ -17,13 +17,14 @@ namespace :generate do
   end
 
   def generate_substantivo word
-    url = "http://www.dicio.com.br/#{word.slugify}/"
+    url = "https://www.dicio.com.br/#{word.slugify}/"
     puts "Getting url #{url.colorize :yellow}"
     content = Net::HTTP.get(URI.parse(url))
     page = Nokogiri::HTML content
 
     begin
-      type = page.css('.card p.adicional:not(.sinonimos) > b:first-child').first.content.downcase
+      page_css = page.css('.card p.adicional:not(.sinonimos) > b:first-child')
+      type = page_css.first.content.downcase
       title = word_title = page.css('#content .card h1').first.content
 
       substantivo = Substantivo.new
@@ -83,7 +84,9 @@ namespace :generate do
 
       puts "Saving word #{title}".colorize :green
       substantivo.save
-    rescue
+    rescue Exception => e
+      puts "Error in word #{word}!".colorize :red
+      puts "Error in word #{e.message}!".colorize :red
     end
   end
 

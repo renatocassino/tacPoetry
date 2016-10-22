@@ -11,7 +11,7 @@ module Crawler
     def self.run
       crawler = Dicio.new true
       crawler.init
-
+      
       puts 'Getting pages urls...'.colorize(:green)
       crawler.get_pagination_links
 
@@ -23,7 +23,7 @@ module Crawler
     end
 
     def init
-      @urls = ['/ultimas_atualizacoes/']
+      @urls = ['/ultimas-atualizacoes/']
       @urls_words = []
     end
 
@@ -53,7 +53,7 @@ module Crawler
 
     def parse_page current_url
       begin
-        content = Net::HTTP.get(URI.parse("http://www.dicio.com.br#{current_url}"))
+        content = Net::HTTP.get(URI.parse("https://www.dicio.com.br#{current_url}"))
         Nokogiri::HTML content
       rescue
       end
@@ -109,7 +109,7 @@ module Crawler
       classe_gramatical = page.css('.card p.adicional:not(.sinonimos) > b:first-child').first.content.downcase
       if (classe_gramatical =~ /sigla/i) == 0
         false
-      elsif classe_gramatical =~ /preposiÃ§Ã£o/i
+      elsif classe_gramatical =~ /preposição/i
         Word.type[:PREPOSICAO]
       elsif classe_gramatical =~ /substantivo/i
         Word.type[:SUBSTANTIVO]
@@ -122,7 +122,7 @@ module Crawler
         end
       elsif classe_gramatical =~ /adjetivo/i
         Word.type[:ADJETIVO]
-      elsif classe_gramatical =~ /advÃ©rbio/i
+      elsif classe_gramatical =~ /advérbio/i
         Word.type[:ADVERBIO]
       elsif classe_gramatical =~ /apositivo/i
         Word.type[:APOSITIVO]
