@@ -56,13 +56,13 @@ module Poetry
       }.freeze
     end
 
-    def generate_text_encoded
+    def generate_text_encoded(number_words = 30)
       types = Markov.types
       condition = Condition.new
 
       text = []
       current_type = nil
-      30.times do
+      number_words.times do
         if current_type.nil?
           current_type = types.keys[SecureRandom.random_number(types.keys.size)]
         end
@@ -76,14 +76,14 @@ module Poetry
       text.join ' '
     end
 
-    def human_text text
+    def human_text(text)
       text.gsub(/(?<word>[A-Z]\w+\.(?:[\w:&]*))/) do |word|
         word = word.split '.'
         word[0]
       end
     end
 
-    def decode_text text
+    def decode_text(text)
       condition = Condition.new
       text.gsub(/(?<word>[A-Z]\w+\.(?:[\w:&]*))/) do |word|
         word = word.split '.'

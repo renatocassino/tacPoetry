@@ -105,11 +105,11 @@ class Verbo
     number = rand(0..consult.all.count-1)
     verbo = consult.limit(-1).skip(number).first
 
-    verbo.conjugado[tempo][numero][pessoa]
+    verbo.conjugando(tempo, numero, pessoa)
   end
 
-  def conjugando
-    if type == verb.types[:regular]
+  def conjugando(tempo, numero, pessoa)
+    if type == types[:regular]
       conjugado[tempo][numero][pessoa]
     else
       attributes[tempo][numero][pessoa]
