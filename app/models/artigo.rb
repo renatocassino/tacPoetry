@@ -26,10 +26,12 @@ class Artigo
     }.freeze
   end
 
-  def self.get_word condition
+  def self.get_word(condition)
     conditions = condition.attributes
     if conditions[:is_defined].nil?
-      is_defined = [:defined, :undefined][SecureRandom.random_number(2)]
+      defined = [:defined, :undefined][SecureRandom.random_number(2)]
+    else
+      defined = conditions[:is_defined]
     end
 
     if conditions[:genero].nil?
@@ -44,7 +46,7 @@ class Artigo
       numero = conditions[:numero]
     end
 
-    self.data[is_defined][genero][numero]
+    data[defined][genero][numero]
   end
 
   def self.get_artigo(defined=:defined, genre=:mas, number=:sin)
