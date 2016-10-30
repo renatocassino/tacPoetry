@@ -1,3 +1,4 @@
+# coding: utf-8
 class Conjuncao
   include Mongoid::Document
   store_in collection: "conjuncao"
@@ -6,7 +7,7 @@ class Conjuncao
   field :stemmed, type: String
   field :type, type: String
 
-  def self.get_word conditions
+  def self.get_word(_)
     number = rand(0..self.all.count-1)
     word = self.limit(-1).skip(number).first
     word.word

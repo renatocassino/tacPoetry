@@ -30,9 +30,9 @@ class Substantivo
 
     where[genero == :mas ? :has_mas : :has_fem] = true
 
-    substantivos = self.where(where)
+    substantivos = Substantivo.where(where)
     number = SecureRandom.random_number(substantivos.count)
-    word = self.limit(-1).skip(number).first
-    eval("word.#{genero}_#{numero}")
+    word = substantivos.limit(-1).skip(number).first
+    word.attributes["#{genero}_#{numero}".to_sym]
   end
 end

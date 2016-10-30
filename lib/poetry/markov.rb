@@ -76,6 +76,13 @@ module Poetry
       text.join ' '
     end
 
+    def human_text text
+      text.gsub(/(?<word>[A-Z]\w+\.(?:[\w:&]*))/) do |word|
+        word = word.split '.'
+        word[0]
+      end
+    end
+
     def decode_text text
       condition = Condition.new
       text.gsub(/(?<word>[A-Z]\w+\.(?:[\w:&]*))/) do |word|
@@ -86,6 +93,7 @@ module Poetry
         begin
           klass.get_word condition
         rescue
+          Rails.logger.error ">>>>>>>>>>>>>>> #{word[0]} #{word[1]}"
           word[0]
         end
       end

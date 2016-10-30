@@ -1,49 +1,45 @@
 # coding: utf-8
+# Eu tu ele, nos vos eles
 class Pronome
   def self.data
     {
       sin: {
-        primeira: "eu",
-        segunda: "tu",
+        primeira: 'eu',
+        segunda: 'tu',
         terceira: {
-          mas: ["ele", "você"],
-          fem: ["ela", "você"]
+          mas: %w(ele você),
+          fem: %w(ela você)
         }
       },
       plu: {
-        primeira: "nós",
-        segunda: "vós",
+        primeira: 'nós',
+        segunda: 'vós',
         terceira: {
-          mas: ["eles", "vocês"],
-          fem: ["elas", "vocês"]
+          mas: %w(eles vocês),
+          fem: %w(elas vocês)
         }
       }
     }.freeze
   end
 
-  def self.get_word condition
+  def self.get_word(condition)
     conditions = condition.attributes
 
-    if conditions[:numero].nil?
-      numero = [:sin, :plu][SecureRandom.random_number(2)]
-    else
-      numero = conditions[:numero]
-    end
+    numero = conditions[:numero].nil? ?
+               [:sin, :plu][SecureRandom.random_number(2)] :
+               conditions[:numero]
 
-    if conditions[:pessoa].nil?
-      pessoa = [:primeira, :segunda, :terceira][SecureRandom.random_number(3)]
-    else
-      pessoa = conditions[:pessoa]
-    end
+    pessoa =  conditions[:pessoa].nil? ?
+                [:primeira, :segunda, :terceira][SecureRandom.random_number(3)] :
+                conditions[:pessoa]
 
-    if conditions[:genero].nil?
-      genero = [:mas, :fem][SecureRandom.random_number(2)]
-    else
-      genero = conditions[:genero]
-    end
+    genero = conditions[:genero].nil? ?
+               [:mas, :fem][SecureRandom.random_number(2)] :
+               conditions[:genero]
 
-    pronome = self.data[numero][pessoa]
-    return pronome if pronome.class.name == "String"
+    pronome = data[numero][pessoa]
+    return pronome if pronome.class.name == 'String'
     pronome[genero].sample
   end
 end
+
