@@ -1,5 +1,5 @@
 # coding: utf-8
-require "rails_helper"
+require 'rails_helper'
 
 RSpec.describe '#String' do
   describe '.to_slug' do
@@ -46,5 +46,10 @@ RSpec.describe '#String' do
       expect('anões'.to_slug).to eq('anoes')
     end
   end
-end
 
+  describe '.separate_words' do
+    it 'should be transform string in array' do
+      expect('algo lindo mesmo'.separate_words).to eq(%w(algo lindo mesmo))
+    end
+  end
+end
