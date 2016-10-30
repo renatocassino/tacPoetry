@@ -1,9 +1,9 @@
-require "rails_helper"
+require 'rails_helper'
 
-RSpec.describe Artigo, :type => :model do
+RSpec.describe Artigo do
   describe '#artigo' do
-    it "singular masculine defined" do
-      # expect(Artigo.get_artigo(:masculine, :singular)).to eq 'o'
+    it 'singular masculine defined' do
+      expect(Artigo.get_artigo(:defined, :mas, :sin)).to eq 'o'
     end
   end
 end

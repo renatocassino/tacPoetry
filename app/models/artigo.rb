@@ -47,8 +47,7 @@ class Artigo
     self.data[is_defined][genero][numero]
   end
 
-  def self.get_artigo(genre=:mas, number=:sin)
-    data = self.data
-    data[rand(0..data.count-1)][genre][number]
+  def self.get_artigo(defined=:defined, genre=:mas, number=:sin)
+    data[defined][genre][number]
   end
 end
